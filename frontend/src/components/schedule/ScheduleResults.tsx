@@ -149,7 +149,6 @@ export function ScheduleResults({
 
   return (
     <section id="schedule-results" className="space-y-4">
-      {/* Header */}
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
           <h2 className="mt-4 text-2xl font-bold tracking-tight text-slate-950">
@@ -172,9 +171,7 @@ export function ScheduleResults({
         </span>
       </div>
 
-      {/* Statistics & Timetable */}
       <div className="grid min-w-0 grid-cols-1 gap-4 lg:grid-cols-[minmax(300px,1fr)_minmax(0,2fr)] lg:items-stretch">
-        {/* Statistics */}
         <aside className="flex min-w-0 flex-col gap-2 lg:h-full">
           <div className="flex flex-1 flex-col gap-2">
             {statistics.map((stat) => (
@@ -194,7 +191,6 @@ export function ScheduleResults({
           </div>
         </aside>
 
-        {/* Timetable */}
         {hasSolution ? (
           <section className="min-w-0 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
             <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 px-4 py-3">
@@ -266,9 +262,7 @@ export function ScheduleResults({
         )}
       </div>
 
-      {/* Search Process & Eliminated Classes */}
       <div className="grid min-w-0 grid-cols-1 gap-3 lg:grid-cols-[1.5fr_1fr] lg:items-start">
-        {/* Search Process */}
         <section className="min-w-0 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
           <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 px-4 py-3">
             <div>
@@ -331,7 +325,6 @@ export function ScheduleResults({
           )}
         </section>
 
-        {/* Eliminated Classes */}
         <section className="min-w-0 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
           <div className="border-b border-slate-100 px-4 py-3">
             <h3 className="text-sm font-bold text-slate-900">

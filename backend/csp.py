@@ -1,11 +1,3 @@
-# csp.py
-# Model CSP penjadwalan kuliah + algoritma backtracking (dengan opsi FC, MRV, LCV)
-#
-# Variabel   : mata kuliah (TG, KKA, ...)
-# Domain     : kelas-kelas dari mata kuliah itu, masing-masing punya slot (S1 - S16)
-# Constraint : - tidak boleh ada dua kelas di slot yang sama (dicek saat pencarian)
-#              - constraint tambahan dari skenario (dipakai untuk menyaring domain di awal)
-
 import json
 import time
 from itertools import product
@@ -20,7 +12,6 @@ def baca_data(path):
     data = baca_json(path)
     jumlah_sesi = len(data["sesi"])
     for k in data["kelas"]:
-        # Senin sesi 1 = S1, Senin sesi 2 = S2, ..., Selasa sesi 1 = S5, dst.
         k["slot"] = data["hari"].index(k["hari"]) * jumlah_sesi + k["sesi"]
         k["nama"] = f'{k["mk"]}-{k["kelas"]}'
     return data
@@ -42,7 +33,7 @@ def alasan_dihapus(kelas, constraint):
 def buat_domain(data, constraint):
     domain = {mk: [] for mk in data["mata_kuliah"]}
     dihapus = []
-    urutan = []  # urutan kemunculan pertama di daftar jadwal (setelah constraint diterapkan)
+    urutan = []  
     for k in sorted(data["kelas"], key=lambda k: k["slot"]):
         alasan = alasan_dihapus(k, constraint)
         if alasan:
@@ -51,10 +42,7 @@ def buat_domain(data, constraint):
             domain[k["mk"]].append(k)
             if k["mk"] not in urutan:
                 urutan.append(k["mk"])
-    # mata kuliah yang domainnya kosong ditaruh di akhir
     urutan += [mk for mk in data["mata_kuliah"] if mk not in urutan]
-    # urutan ini dipakai sebagai urutan pengisian (polos/fc) dan pemecah seri MRV/Degree,
-    # sama seperti aturan "lebih dulu di daftar jadwal" pada perhitungan manual
     return {mk: domain[mk] for mk in urutan}, dihapus
 
 
@@ -79,12 +67,12 @@ class Backtracking:
         self.lcv = lcv
         self.cari_semua = cari_semua
         self.catat_langkah = catat_langkah
-        self.maks_solusi = maks_solusi  # berhenti setelah sekian solusi (None = tanpa batas)
+        self.maks_solusi = maks_solusi 
 
-        self.solusi = []          # disimpan maksimal 20 solusi pertama
+        self.solusi = []       
         self.jumlah_solusi = 0
-        self.node = 0             # berapa kali sebuah kelas di-assign
-        self.backtrack = 0        # berapa kali assignment dibatalkan karena gagal
+        self.node = 0             
+        self.backtrack = 0        
         self.langkah = []
         self.waktu = 0
 
@@ -94,7 +82,6 @@ class Backtracking:
         self.waktu = time.perf_counter() - mulai
         return self
 
-    # ---------- heuristik ----------
     def degree(self, mk, belum, domain):
         """Jumlah mata kuliah lain (yang belum diisi) yang punya slot sama dengan mk."""
         slot_mk = slot_dari(domain[mk])
@@ -104,7 +91,6 @@ class Backtracking:
         belum = [mk for mk in self.urutan if mk not in terisi]
         if not self.mrv:
             return belum[0]
-        # MRV: domain paling sedikit. Kalau seri -> degree terbesar. Kalau masih seri -> urutan data
         return min(belum, key=lambda mk: (len(domain[mk]), -self.degree(mk, belum, domain)))
 
     def hitung_eliminasi(self, kelas, terisi, domain):
@@ -113,12 +99,11 @@ class Backtracking:
                    for k in domain[mk] if k["slot"] == kelas["slot"])
 
     def urutkan_nilai(self, mk, terisi, domain):
-        nilai = list(domain[mk])  # sudah urut dari slot terkecil
+        nilai = list(domain[mk])
         if self.lcv:
             nilai.sort(key=lambda k: self.hitung_eliminasi(k, terisi, domain))
         return nilai
 
-    # ---------- pengecekan constraint ----------
     def bentrok(self, kelas, terisi):
         for k in terisi.values():
             if k["slot"] == kelas["slot"]:
@@ -134,7 +119,6 @@ class Backtracking:
         kosong = [mk for mk in self.urutan if mk not in terisi and not domain_baru[mk]]
         return domain_baru, kosong
 
-    # ---------- inti backtracking ----------
     def cari(self, terisi, domain):
         if len(terisi) == len(self.urutan):
             self.jumlah_solusi += 1
@@ -187,7 +171,6 @@ class Backtracking:
     def cukup(self):
         return self.maks_solusi is not None and self.jumlah_solusi >= self.maks_solusi
 
-    # ---------- pencatatan langkah ----------
     def catat(self, assignment, keterangan):
         if self.catat_langkah and len(self.langkah) < 100:
             self.langkah.append((assignment, keterangan))

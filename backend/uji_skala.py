@@ -1,9 +1,3 @@
-# uji_skala.py
-# Uji skalabilitas pakai data acak, untuk bahan analisis kompleksitas waktu.
-#
-#   python uji_skala.py                 -> data longgar (slot lebih banyak dari mata kuliah)
-#   python uji_skala.py --ketat         -> data ketat (jumlah slot = jumlah mata kuliah)
-
 import argparse
 import random
 import time
@@ -11,7 +5,7 @@ import time
 from csp import Backtracking, buat_domain
 from main import METODE
 
-BATAS_NODE = 200_000  # kalau lewat batas ini, pencarian dianggap terlalu lama
+BATAS_NODE = 200_000 
 
 
 def data_acak(jumlah_mk, kelas_per_mk, jumlah_slot, seed):

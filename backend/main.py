@@ -1,14 +1,3 @@
-# main.py
-# Cara pakai:
-#   python main.py                          -> skenario "awal", cari 1 solusi
-#   python main.py tambahan_2 --semua       -> semua solusi skenario tambahan_2
-#   python main.py tambahan_1 --metode polos
-#   python main.py --banding                -> bandingkan semua metode di semua skenario
-#   python main.py tambahan_3 --semua --maks 10   -> berhenti setelah 10 solusi
-#   python main.py tambahan_2 --metode polos --urutan TG,KKA,KPPL,MD,PW,PBO,JK
-#                                           -> pakai urutan variabel sendiri
-# Urutan variabel bawaan = urutan kemunculan pertama di daftar jadwal (seperti perhitungan manual).
-
 import argparse
 import statistics
 
@@ -69,7 +58,7 @@ def tampilkan_skenario(data, nama, skenario, metode, cari_semua, urutan=None, ma
     else:
         print("Tidak ada solusi.")
 
-    # waktu diukur ulang tanpa pencatatan langkah supaya akurat
+  
     waktu = ukur_waktu(lambda: Backtracking(domain, **METODE[metode], cari_semua=cari_semua,
                                             maks_solusi=maks).jalankan().waktu)
     print(f"\nJumlah solusi: {bt.jumlah_solusi:,} | node: {bt.node:,} | "
@@ -77,7 +66,7 @@ def tampilkan_skenario(data, nama, skenario, metode, cari_semua, urutan=None, ma
 
 
 def ukur_waktu(fungsi, ulang=5):
-    # waktunya sangat kecil, jadi diambil median dari beberapa kali run
+
     return statistics.median(fungsi() for _ in range(ulang))
 
 

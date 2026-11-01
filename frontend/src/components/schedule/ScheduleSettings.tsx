@@ -82,7 +82,6 @@ export function ScheduleSettings({
   return (
     <section className="flex h-full min-h-0 w-full min-w-0 flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
 
-      {/* Header */}
       <header className="shrink-0 border-b border-slate-100 px-4 py-4 sm:px-5">
         <div className="flex items-center justify-between gap-2">
           <div className="min-w-0">
@@ -105,11 +104,8 @@ export function ScheduleSettings({
         </div>
       </header>
 
-      {/* Scrollable content */}
       <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-4 sm:px-5">
         <div className="flex flex-col gap-5">
-
-          {/* Algoritma */}
           <section>
             <h3 className="text-sm font-bold text-slate-800">
               Algoritma CSP
@@ -153,7 +149,6 @@ export function ScheduleSettings({
             </div>
           </section>
 
-          {/* Mode pencarian */}
           <section>
             <h3 className="text-sm font-bold text-slate-800">
               Mode pencarian
@@ -192,9 +187,7 @@ export function ScheduleSettings({
             )}
           </section>
 
-          {/* Constraint hari dan sesi */}
           <section className="grid grid-cols-2 gap-4">
-            {/* Hari */}
             <div className="min-w-0">
               <h3 className="text-xs font-bold text-slate-800">
                 Hari dihindari
@@ -230,7 +223,6 @@ export function ScheduleSettings({
               </div>
             </div>
 
-            {/* Sesi */}
             <div className="min-w-0">
               <h3 className="text-xs font-bold text-slate-800">
                 Sesi dihindari
@@ -268,7 +260,6 @@ export function ScheduleSettings({
             </div>
           </section>
 
-          {/* Dosen wajib */}
           <section>
             <div className="flex items-center justify-between gap-2">
               <h3 className="text-sm font-bold text-slate-800">

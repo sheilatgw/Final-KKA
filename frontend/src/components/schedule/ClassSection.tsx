@@ -18,7 +18,6 @@ export function ClassSection(props: ClassSectionProps) {
   return (
     <section className="flex h-full min-h-0 w-full min-w-0 flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
 
-      {/* Header */}
       <header className="shrink-0 border-b border-slate-100 px-4 py-4">
         <div className="flex items-center justify-between gap-2">
           <div className="min-w-0">
@@ -45,7 +44,6 @@ export function ClassSection(props: ClassSectionProps) {
         </div>
       </header>
 
-      {/* Vertical scroll only */}
       <div className="min-h-0 min-w-0 flex-1 overflow-y-auto overflow-x-hidden">
         <ClassTable
           classes={props.classes}
@@ -53,7 +51,6 @@ export function ClassSection(props: ClassSectionProps) {
         />
       </div>
 
-      {/* Footer */}
       <footer className="flex shrink-0 items-center justify-between gap-2 border-t border-slate-100 px-4 py-3">
         <span className="text-[11px] text-slate-500">
           {props.classes.length} dari {props.totalClasses} kelas

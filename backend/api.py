@@ -140,8 +140,6 @@ def generate_schedule(request: JadwalRequest):
 
     opsi = METODE[request.algoritma]
 
-    # Pencatatan langkah diaktifkan agar frontend dapat menampilkan
-    # assignment, eliminasi domain, konflik, dan proses mundur.
     bt = Backtracking(
         domain,
         **opsi,
