@@ -55,7 +55,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:3000",
-        "https://backend-chi-steel-36.vercel.app/",
+        "https://backend-chi-steel-36.vercel.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],
