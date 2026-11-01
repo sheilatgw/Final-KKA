@@ -1,0 +1,28 @@
+{
+  "awal": {
+    "deskripsi": "Hanya constraint awal (tiap mata kuliah 1 kelas, tidak boleh bentrok)",
+    "constraint": {}
+  },
+  "tambahan_1": {
+    "deskripsi": "Tanpa kelas pagi, PBO & PW dengan dosen L, hari Kamis kosong",
+    "constraint": {
+      "tanpa_sesi": [1],
+      "dosen_wajib": {"PBO": "L", "PW": "L"},
+      "tanpa_hari": ["Kamis"]
+    }
+  },
+  "tambahan_2": {
+    "deskripsi": "Tanpa kelas pagi, PBO & PW dengan dosen L, KKA dengan dosen D",
+    "constraint": {
+      "tanpa_sesi": [1],
+      "dosen_wajib": {"PBO": "L", "PW": "L", "KKA": "D"}
+    }
+  },
+  "relaksasi_1": {
+    "deskripsi": "Tambahan_1 tanpa syarat dosen L (constraint mana penyebab tidak ada solusi?)",
+    "constraint": {
+      "tanpa_sesi": [1],
+      "tanpa_hari": ["Kamis"]
+    }
+  }
+}
